@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import CreateTrip from "./pages/CreateTrip/CreateTrip";
 import Header from "./components/Header/Header";
+import { Toaster } from "./components/ui/sonner";
 
 // Method-1 for Routing
 // const routes = createBrowserRouter([
@@ -27,6 +28,7 @@ const App = () => {
       {/* Method -1 Routing */}
       {/* <RouterProvider router={routes} /> */}
       <Header />
+      <Toaster />
       {routes}
     </div>
   );
