@@ -11,6 +11,20 @@ import { toast } from "sonner";
 import MappleInput from "@/components/MappleInput/MappleInput";
 import { chatSession } from "@/Service/AIModal";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import logo from "../../assets/logo.svg";
+import { FcGoogle } from "react-icons/fc";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+
 const CreateTrip = () => {
   const [place, setPlace] = useState();
 
@@ -20,6 +34,30 @@ const CreateTrip = () => {
 
   const handleInputChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
+  };
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResp) => GetUserProfile(codeResp),
+    onError: (error) => console.log(error),
+  });
+
+  const GetUserProfile = (tokenInfo) => {
+    axios
+      .get(
+        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${tokenInfo?.access_token}`,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenInfo?.access_token}`,
+            Accept: "Application/json",
+          },
+        }
+      )
+      .then((resp) => {
+        console.log(resp);
+        localStorage.setItem("user", JSON.stringify(resp?.data));
+        setOpenDialog(false);
+        onGenerateTrip();
+      });
   };
 
   // TODO -> change it later for better validation
@@ -152,6 +190,25 @@ const CreateTrip = () => {
       <div className="my-10 flex justify-end">
         <Button onClick={onGenerateTrip}>Generate Trip</Button>
       </div>
+
+      <Dialog open={openDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogDescription>
+              <img src={logo} />
+              <h2 className="font-bold text-lg mt-7">Sign In With Google</h2>
+              <p>Sign in to the App with Google Authentication securely. </p>
+              <Button
+                className="w-full mt-5 flex gap-4 items-center"
+                onClick={login}
+              >
+                <FcGoogle className="h-7 w-7" />
+                Sign In With Google
+              </Button>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
