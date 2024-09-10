@@ -24,6 +24,9 @@ import logo from "../../assets/logo.svg";
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../Service/FirebaseConfig";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const CreateTrip = () => {
   const [place, setPlace] = useState();
@@ -31,6 +34,8 @@ const CreateTrip = () => {
   const [formData, setFormData] = useState([]);
 
   const [openDialog, setOpenDialog] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
@@ -60,6 +65,21 @@ const CreateTrip = () => {
       });
   };
 
+  const SaveAiTrip = async (TripData) => {
+    setLoading(true);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const docId = Date.now().toString();
+
+    await setDoc(doc(db, "AI_Trip", docId), {
+      userSelection: formData,
+      tripData: JSON.parse(TripData),
+      userEmail: user?.email,
+      id: docId,
+    });
+
+    setLoading(false);
+  };
+
   // TODO -> change it later for better validation
   const onGenerateTrip = async () => {
     const user = localStorage.getItem("user");
@@ -67,6 +87,11 @@ const CreateTrip = () => {
     if (!user) {
       // return toast("Please login to generate trip");
       setOpenDialog(true);
+    }
+
+    if (formData?.noOfDays > 5) {
+      toast("Please select days less than 5");
+      return;
     }
 
     if (
@@ -79,22 +104,21 @@ const CreateTrip = () => {
       return;
     }
 
+    console.log(formData);
+
+    setLoading(true);
     const FINAL_PROMPT = AI_PROMPT.replace("{location}", formData?.location)
       .replace("{totalDays}", formData?.noOfDays)
       .replace("{noOfPeople}", formData?.travellers)
       .replace("{budget}", formData?.budget);
 
     console.log(FINAL_PROMPT);
-
     const result = await chatSession.sendMessage(FINAL_PROMPT);
+    console.log("--", result?.response?.text());
 
-    console.log(result?.response?.text());
+    setLoading(false);
 
-    if (formData?.noOfDays > 5) {
-      toast("Please select days less than 5");
-      return;
-    }
-    console.log(formData);
+    SaveAiTrip(result?.response?.text());
   };
 
   useEffect(() => {
@@ -188,7 +212,13 @@ const CreateTrip = () => {
       </div>
 
       <div className="my-10 flex justify-end">
-        <Button onClick={onGenerateTrip}>Generate Trip</Button>
+        <Button onClick={onGenerateTrip} disabled={loading}>
+          {loading ? (
+            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />
+          ) : (
+            "Generate Trip"
+          )}
+        </Button>
       </div>
 
       <Dialog open={openDialog}>
