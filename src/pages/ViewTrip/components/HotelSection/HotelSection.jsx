@@ -1,6 +1,7 @@
 import React from "react";
 import PlaceholderImg from "../../../../assets/Placeholder.jpeg";
 import { Link } from "react-router-dom";
+import HotelCard from "../HotelCard/HotelCard";
 
 const HotelSection = ({ trip }) => {
   return (
@@ -13,27 +14,7 @@ const HotelSection = ({ trip }) => {
           trip?.tripData?.Hotels ||
           []
         ).map((hotel, index) => (
-          <Link
-            to={
-              `https://www.google.com/maps/search/?api=1&query=` +
-              hotel.HotelName +
-              "," +
-              hotel.HotelAddress
-            }
-            target="_blank"
-          >
-            <div className="hover:scale-105 transition-all cursor-pointer">
-              <img src={PlaceholderImg} alt="" className="rounded-xl" />
-              <div className="my-2 flex flex-col">
-                <h2 className="font-medium">{hotel.HotelName}</h2>
-                <h2 className="text-xs text-gray-500">
-                  📍 {hotel.HotelAddress}
-                </h2>
-                <h2 className="text-sm">💲{hotel.Price}</h2>
-                <h2 className="text-sm">⭐ {hotel.Rating}</h2>
-              </div>
-            </div>
-          </Link>
+          <HotelCard hotel={hotel} />
         ))}
       </div>
     </div>

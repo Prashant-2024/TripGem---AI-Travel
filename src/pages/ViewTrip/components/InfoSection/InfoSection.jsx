@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PlaceholderImg from "../../../../assets/Placeholder.jpeg";
 import { Button } from "@/components/ui/button";
 import { FaShare } from "react-icons/fa";
+import {
+  GetPlaceDetails,
+  PHOTO_REF_URL,
+} from "../../../../Service/PlacesPhotoAPI";
 
 const InfoSection = ({ trip }) => {
+  // Google Place Photo API Call for the location
+  // const [photoUrl, setPhotoUrl] = useState("");
+
+  // useEffect(() => {
+  //   trip && GetPlacePhoto();
+  // }, [trip]);
+
+  // const GetPlacePhoto = async () => {
+  //   const data = {
+  //     textQuery: trip?.userSelection?.location,
+  //   };
+
+  //   const result = await GetPlaceDetails(data).then((resp) => {
+  //     console.log(resp.data.places[0].photos[3].name);
+  //   });
+
+  //   const PhotoUrl = PHOTO_REF_URL.replace(
+  //     "{NAME}",
+  //     result.data.places[0].photos[3].name
+  //   );
+  //   setPhotoUrl(PhotoUrl);
+  // };
+
   return (
     <div>
       <img
+        // src={photoUrl} -> If Google API is used
         src={PlaceholderImg}
         className="h-[340px] w-full object-cover rounded-xl"
         alt=""
