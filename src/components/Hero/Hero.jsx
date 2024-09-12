@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
+import LandingPageImg from "../../assets/landing_page.png";
 
 const Hero = () => {
   return (
@@ -18,6 +19,7 @@ const Hero = () => {
       <Link to="/create-trip">
         <Button>Get Started, It's Free</Button>
       </Link>
+      <img src={LandingPageImg} alt=""/>
     </div>
   );
 };
