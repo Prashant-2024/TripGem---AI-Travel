@@ -8,7 +8,7 @@ import {
 } from "../../../../Service/PlacesPhotoAPI";
 
 const InfoSection = ({ trip }) => {
-  // Google Place Photo API Call for the location
+  // // Google Place Photo API Call for the location
   // const [photoUrl, setPhotoUrl] = useState("");
 
   // useEffect(() => {
