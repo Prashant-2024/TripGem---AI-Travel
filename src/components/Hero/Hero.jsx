@@ -19,7 +19,12 @@ const Hero = () => {
       <Link to="/create-trip">
         <Button>Get Started, It's Free</Button>
       </Link>
-      <img src={LandingPageImg} alt=""/>
+      <img src={LandingPageImg} alt="" />
+
+      <h1 className="font-bold text-4xl mt-20">
+        <span className="text-red-700 font-extrabold text-4xl">UPCOMING: </span>{" "}
+        HOTEL & PLACES Images will be updated soon.
+      </h1>
     </div>
   );
 };

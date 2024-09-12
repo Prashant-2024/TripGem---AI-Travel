@@ -43,6 +43,11 @@ const ViewTrip = () => {
       {/* Daily Plan */}
       <Itinerary trip={trip} />
 
+      <h1 className="font-bold text-4xl mt-20">
+        <span className="text-red-700 font-extrabold text-4xl">UPCOMING: </span>{" "}
+        HOTEL & PLACES Images will be updated soon.
+      </h1>
+
       {/* Footer */}
       <Footer trip={trip} />
     </div>
