@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import CreateTrip from "./pages/CreateTrip/CreateTrip";
 import Header from "./components/Header/Header";
 import { Toaster } from "./components/ui/sonner";
+import ViewTrip from "./pages/ViewTrip/[tripId]/ViewTrip";
 
 // Method-1 for Routing
 // const routes = createBrowserRouter([
@@ -18,6 +19,7 @@ const routes = (
     <Routes>
       <Route path="/" exact element={<Home />} />
       <Route path="/create-trip" exact element={<CreateTrip />} />
+      <Route path="view-trip/:tripId" element={<ViewTrip />} />
     </Routes>
   </Router>
 );
