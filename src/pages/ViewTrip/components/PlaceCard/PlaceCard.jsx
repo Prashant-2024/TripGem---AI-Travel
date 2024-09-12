@@ -8,7 +8,7 @@ import {
   PHOTO_REF_URL,
 } from "../../../../Service/PlacesPhotoAPI";
 
-const PlaceCard = ({ place }) => {
+const PlaceCard = ({ place, index }) => {
   // // Google Place Photo API Call for the location
   // const [photoUrl, setPhotoUrl] = useState("");
 
@@ -37,7 +37,10 @@ const PlaceCard = ({ place }) => {
       to={`https://www.google.com/maps/search/?api=1&query=` + place.PlaceName}
       target="_blank"
     >
-      <div className="border rounded-xl p-3 mt-4 flex gap-5 hover:scale-105 transition-all hover:shadow-sm cursor-pointer">
+      <div
+        key={index}
+        className="border rounded-xl p-3 mt-4 flex gap-5 hover:scale-105 transition-all hover:shadow-sm cursor-pointer"
+      >
         <img
           // src={photoUrl} -> If Google API is used
           src={PlaceholderImg}

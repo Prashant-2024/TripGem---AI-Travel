@@ -14,7 +14,7 @@ const HotelSection = ({ trip }) => {
           trip?.tripData?.Hotels ||
           []
         ).map((hotel, index) => (
-          <HotelCard hotel={hotel} />
+          <HotelCard hotel={hotel} key={index} />
         ))}
       </div>
     </div>

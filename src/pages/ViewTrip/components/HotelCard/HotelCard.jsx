@@ -6,7 +6,7 @@ import {
   PHOTO_REF_URL,
 } from "../../../../Service/PlacesPhotoAPI";
 
-const HotelCard = ({ hotel }) => {
+const HotelCard = ({ hotel, index }) => {
   // // Google Place Photo API Call for the location
   // const [photoUrl, setPhotoUrl] = useState("");
 
@@ -40,7 +40,7 @@ const HotelCard = ({ hotel }) => {
       }
       target="_blank"
     >
-      <div className="hover:scale-105 transition-all cursor-pointer">
+      <div key={index} className="hover:scale-105 transition-all cursor-pointer">
         <img
           // src={PhotoUrl} -> If Google API is used
           src={PlaceholderImg}

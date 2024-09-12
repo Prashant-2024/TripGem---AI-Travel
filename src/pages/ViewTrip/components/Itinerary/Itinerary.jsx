@@ -8,11 +8,11 @@ const Itinerary = ({ trip }) => {
       <div>
         {(trip?.tripData?.Itinerary || trip?.tripData?.itinerary || []).map(
           (item, index) => (
-            <div className="mt-5">
+            <div className="mt-5" key={index}>
               <h2 className="font-medium text-lg">{item.day || item.Day}</h2>
               <div className="grid md:grid-cols-2 gap-5">
                 {(item.plan || item.Plan).map((place, index) => (
-                  <div>
+                  <div  key={index}>
                     <h2 className="font-medium text-sm text-orange-500">
                       {place.TimeTravel}
                     </h2>
