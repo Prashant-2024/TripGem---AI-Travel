@@ -11,7 +11,7 @@ const HotelSection = ({ trip }) => {
         {(
           trip?.tripData?.HotelOptions ||
           trip?.tripData?.hotelOptions ||
-          trip?.tripData?.Hotels ||
+          trip?.tripData?.hotels ||
           []
         ).map((hotel, index) => (
           <HotelCard hotel={hotel} key={index} />
