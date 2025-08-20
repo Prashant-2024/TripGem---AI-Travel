@@ -11,7 +11,7 @@ const Itinerary = ({ trip }) => {
             <div className="mt-5" key={index}>
               <h2 className="font-medium text-lg">{item.day || item.Day}</h2>
               <div className="grid md:grid-cols-2 gap-5">
-                {(item.plan || item.Plan || item.Places).map((place, index) => (
+                {(item.plan || item.Plan || item.Places || item.places).map((place, index) => (
                   <div key={index}>
                     <h2 className="font-medium text-sm text-orange-500">
                       {place.TimeTravel}

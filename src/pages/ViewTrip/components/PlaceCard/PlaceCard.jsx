@@ -44,19 +44,25 @@ const PlaceCard = ({ place, index }) => {
         <img
           // src={photoUrl} -> If Google API is used
           src={PlaceholderImg}
-          alt=""
+          alt={place.PlaceName}
           className="w-[130px] h-[130px] rounded-xl"
+          // onError={(e) => (e.target.src = "/Placeholder.jpeg")}
         />
         <div>
           <h2 className="font-bold text-lg">{place.PlaceName}</h2>
           <p className="text-sm text-gray-400">{place.PlaceDetails}</p>
           {/* Time Takes to travel is to be added */}
-          {/* <h2 className="mt-2">🕙 {place.TimeTravel}</h2> */}
+          <div className="mt-2 text-sm text-gray-600">
+            <p>🕙 {place.TimeTravel}</p>
+            {place.TicketPricing && <p>🎟️ {place.TicketPricing}</p>}
+            {place.Rating && <p>⭐ {place.Rating}</p>}
+            {place.TravelMode && <p>🚖 {place.TravelMode}</p>}
+          </div>
 
           {/* Optional - Button to Add for Navigation on Click */}
-          {/* <Button size="sm">
-          <FaLocationDot />
-          </Button> */}
+          <Button size="sm">
+            <FaLocationDot />
+          </Button>
         </div>
       </div>
     </Link>
